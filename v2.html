@@ -35,9 +35,15 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 
 /* ─── TOP BAR ─── */
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:var(--white);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border)}
-.topbar-logo{display:flex;align-items:center;gap:10px}
-.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--primary),#C44A00);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:1.1rem}
-.logo-text{font-size:.95rem;font-weight:700;color:var(--text)}
+.topbar-logo{display:flex;align-items:center;gap:0}
+/* Mini brand logo for topbar */
+.topbar-brand{display:inline-flex;flex-direction:column;align-items:center}
+.topbar-brand-main{background:linear-gradient(180deg,#3E2415,#2A1A0E 50%,#1E120A);border-radius:6px;padding:6px 14px 8px;position:relative;border:1.5px solid #4A2E1A;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.topbar-brand-main::before{content:'';position:absolute;inset:2px;border-radius:4px;border:1px solid rgba(255,255,255,.05);pointer-events:none}
+.topbar-brand-text{display:flex;align-items:center;gap:5px;color:#fff;font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;font-family:Georgia,'Times New Roman',serif}
+.topbar-brand-text .amp{color:var(--primary);font-style:italic;font-size:.65rem}
+.topbar-brand-dot{width:3px;height:3px;background:var(--primary);border-radius:50%}
+.topbar-brand-year{background:linear-gradient(135deg,var(--primary),#D06A15);color:#fff;font-size:.4rem;font-weight:800;padding:1px 8px;border-radius:50px;letter-spacing:2px;margin-top:-4px;position:relative;z-index:1}
 .topbar-actions{display:flex;gap:8px}
 .icon-btn{width:40px;height:40px;border-radius:50%;border:none;background:var(--bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;color:var(--text-secondary);transition:background .2s}
 .icon-btn:hover{background:var(--border)}
@@ -49,7 +55,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .back-btn{width:36px;height:36px;border-radius:50%;border:none;background:var(--bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--text);transition:background .2s}
 .back-btn:hover{background:var(--border)}
 .topbar-title{font-size:1.05rem;font-weight:700;flex:1;text-align:center}
-.home-btn{width:36px;height:36px;border-radius:50%;border:none;background:var(--primary-light);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--primary);transition:background .2s}
+.home-btn{width:36px;height:36px;border-radius:50%;border:none;background:var(--primary-light);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;color:var(--primary);transition:background .2s}
 .home-btn:hover{background:#FFE4C4}
 
 /* ─── VIEWS ─── */
@@ -111,12 +117,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .subcat-list{padding:8px 20px 20px}
 .subcat-card{background:var(--white);border-radius:var(--radius);padding:16px;display:flex;align-items:center;gap:14px;margin-bottom:10px;box-shadow:var(--shadow);cursor:pointer;transition:transform .15s,box-shadow .15s}
 .subcat-card:active{transform:scale(.98)}
-.subcat-img{width:64px;height:64px;border-radius:var(--radius-sm);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:2.2rem}
+.subcat-img{width:64px;height:64px;border-radius:var(--radius-sm);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:2.2rem;background:var(--primary-light)}
 .subcat-info{flex:1}
 .subcat-info strong{font-size:1rem;display:block;color:var(--text)}
 .subcat-info span{font-size:.78rem;color:var(--text-secondary);display:block;margin-top:2px}
 .subcat-arrow{color:var(--text-muted);font-size:1rem}
-.quality-banner{margin:8px 20px 24px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-radius:var(--radius-sm);padding:12px 16px;display:flex;align-items:center;gap:10px;color:#fff}
+.quality-banner{margin:8px 20px 24px;background:linear-gradient(135deg,#3E2415,#2A1A0E);border:1.5px solid #4A2E1A;border-radius:var(--radius-sm);padding:12px 16px;display:flex;align-items:center;gap:10px;color:#fff}
 .quality-banner .qb-icon{font-size:1.1rem}
 .quality-banner span{font-size:.8rem;font-weight:600}
 
@@ -200,8 +206,16 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <div class="view active" id="viewHome">
   <div class="topbar">
     <div class="topbar-logo">
-      <div class="logo-icon">L</div>
-      <span class="logo-text">Leños & Carbón</span>
+      <div class="topbar-brand">
+        <div class="topbar-brand-main">
+          <div class="topbar-brand-text">
+            <span class="topbar-brand-dot"></span>
+            Leños <span class="amp">&</span> Carbón
+            <span class="topbar-brand-dot"></span>
+          </div>
+        </div>
+        <div class="topbar-brand-year">1998</div>
+      </div>
     </div>
     <div class="topbar-actions">
       <button class="icon-btn has-badge" onclick="openNotifications()" aria-label="Notificaciones">
@@ -269,17 +283,17 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
   <div class="more-cats">
     <h3>Más opciones</h3>
     <div class="more-cat-item" onclick="openSubcat('platos')">
-      <div class="more-cat-icon" style="background:#FFF7ED">🍽️</div>
+      <div class="more-cat-icon" style="background:#FFF3E6">🍽️</div>
       <div class="more-cat-info"><strong>Platos Principales</strong><span>Cotidianos, Picadas, Hamburguesas...</span></div>
       <span class="more-cat-arrow">&#8250;</span>
     </div>
     <div class="more-cat-item" onclick="openSubcat('desayunos')">
-      <div class="more-cat-icon" style="background:#FFF7ED">🌅</div>
+      <div class="more-cat-icon" style="background:#FFF3E6">🌅</div>
       <div class="more-cat-info"><strong>Desayunos</strong><span>Calentados, Caldos, Huevos...</span></div>
       <span class="more-cat-arrow">&#8250;</span>
     </div>
     <div class="more-cat-item" onclick="openSubcat('kits')">
-      <div class="more-cat-icon" style="background:#FFF7ED">📦</div>
+      <div class="more-cat-icon" style="background:#FFF3E6">📦</div>
       <div class="more-cat-info"><strong>Kits Parrilleros</strong><span>Para llevar a casa</span></div>
       <span class="more-cat-arrow">&#8250;</span>
     </div>
@@ -359,11 +373,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
         <div class="notif-info"><strong>Información de Alérgenos</strong><span>Consulta aquí los ingredientes detallados</span></div>
       </div>
       <div class="notif-item">
-        <div class="notif-icon" style="background:#FFF7ED">&#11088;</div>
+        <div class="notif-icon" style="background:#FFF3E6">&#11088;</div>
         <div class="notif-info"><strong>Promo del Día: 2x1 en Bebidas</strong><span>Válido de 18:00 a 20:00 hrs.</span></div>
       </div>
       <div class="notif-item">
-        <div class="notif-icon" style="background:#FFF7ED">&#128293;</div>
+        <div class="notif-icon" style="background:#FFF3E6">&#128293;</div>
         <div class="notif-info"><strong>Nuevos cortes de temporada</strong><span>¡Prueba nuestro Tomahawk!</span></div>
       </div>
       <button class="modal-close" onclick="closeNotifications()">CERRAR</button>
@@ -633,7 +647,7 @@ function openSubcat(groupId) {
   document.getElementById('subcatHeader').innerHTML = `<h2>${group.subtitle}</h2><p>Selecciona una categoría para ver los platos disponibles.</p>`;
 
   let html = '';
-  const bgColors = ['#FFF7ED','#F0F9FF','#FDF2F8','#ECFDF5','#FFF7ED','#F5F3FF'];
+  const bgColors = ['#FFF3E6','#FFF0DB','#FFEDD5','#FFF7ED','#FFE8CC','#FFF3E6'];
   group.subcats.forEach((sid,i) => {
     const cat = catById(sid);
     if(!cat) return;

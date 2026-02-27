@@ -51,7 +51,7 @@ body {
   background: linear-gradient(135deg, var(--color-primary) 0%, #5C1A00 100%);
   color: #fff;
   text-align: center;
-  padding: 2rem 1rem 1.2rem;
+  padding: 1.8rem 1rem 1.4rem;
   position: relative;
   overflow: hidden;
 }
@@ -64,14 +64,14 @@ body {
   background: var(--color-bg);
   border-radius: 50% 50% 0 0 / 100% 100% 0 0;
 }
-.header h1 {
-  font-size: 2rem;
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: .15rem;
-}
-.header h1 span { color: var(--color-accent); }
+/* Brand Logo v1 */
+.brand-logo{display:inline-flex;flex-direction:column;align-items:center}
+.brand-logo-main{background:linear-gradient(180deg,#3E2415,#2A1A0E 50%,#1E120A);border-radius:10px;padding:12px 28px 16px;position:relative;box-shadow:0 4px 20px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08);border:2px solid #4A2E1A}
+.brand-logo-main::before{content:'';position:absolute;inset:3px;border-radius:7px;border:1px solid rgba(255,255,255,.06);pointer-events:none}
+.brand-logo-text{display:flex;align-items:center;gap:8px;color:#fff;font-size:1.5rem;font-weight:900;text-transform:uppercase;letter-spacing:2px;font-family:Georgia,'Times New Roman',serif;text-shadow:0 2px 4px rgba(0,0,0,.4)}
+.brand-logo-text .amp{color:#E87A20;font-size:1.3rem;font-style:italic}
+.brand-logo-dot{width:5px;height:5px;background:#E87A20;border-radius:50%;flex-shrink:0}
+.brand-logo-year{background:linear-gradient(135deg,#E87A20,#D06A15);color:#fff;font-size:.6rem;font-weight:800;padding:2px 14px;border-radius:50px;letter-spacing:3px;margin-top:-7px;position:relative;z-index:1;box-shadow:0 2px 8px rgba(232,122,32,.3)}
 .header .subtitle {
   font-size: .85rem;
   opacity: .85;
@@ -470,8 +470,16 @@ body {
 <body>
 
 <header class="header">
-  <h1>Leños <span>&</span> Carbón</h1>
-  <div class="subtitle">Maestros Parrilleros</div>
+  <div class="brand-logo">
+    <div class="brand-logo-main">
+      <div class="brand-logo-text">
+        <span class="brand-logo-dot"></span>
+        Leños <span class="amp">&</span> Carbón
+        <span class="brand-logo-dot"></span>
+      </div>
+    </div>
+    <div class="brand-logo-year">1998</div>
+  </div>
 </header>
 
 <div class="search-wrap">

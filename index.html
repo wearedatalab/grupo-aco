@@ -16,11 +16,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 
 /* Header */
 .header{text-align:center;padding:48px 0 24px}
-.logo-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:12px}
-.logo-icon{width:52px;height:52px;background:linear-gradient(135deg,#E87A20,#C44A00);border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.5rem;color:#fff;box-shadow:0 4px 20px rgba(232,122,32,.4)}
-.logo-text{font-size:1.8rem;font-weight:900;letter-spacing:.5px}
-.logo-text span{color:#E87A20}
-.subtitle{font-size:.85rem;color:rgba(255,255,255,.5);letter-spacing:4px;text-transform:uppercase;font-weight:500}
+/* Brand Logo */
+.brand-logo{display:inline-flex;flex-direction:column;align-items:center;gap:0}
+.brand-logo-main{background:linear-gradient(180deg,#3E2415 0%,#2A1A0E 50%,#1E120A 100%);border-radius:10px;padding:14px 32px 18px;position:relative;box-shadow:0 4px 20px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08);border:2px solid #4A2E1A}
+.brand-logo-main::before{content:'';position:absolute;inset:3px;border-radius:7px;border:1px solid rgba(255,255,255,.06);pointer-events:none}
+.brand-logo-text{display:flex;align-items:center;gap:10px;color:#fff;font-size:1.7rem;font-weight:900;text-transform:uppercase;letter-spacing:2px;font-family:Georgia,'Times New Roman',serif;text-shadow:0 2px 4px rgba(0,0,0,.4)}
+.brand-logo-text .amp{color:#E87A20;font-size:1.5rem;font-style:italic}
+.brand-logo-dot{width:6px;height:6px;background:#E87A20;border-radius:50%;flex-shrink:0}
+.brand-logo-year{background:linear-gradient(135deg,#E87A20,#D06A15);color:#fff;font-size:.65rem;font-weight:800;padding:3px 16px;border-radius:50px;letter-spacing:3px;margin-top:-8px;position:relative;z-index:1;box-shadow:0 2px 8px rgba(232,122,32,.4)}
 
 .tagline{text-align:center;margin:20px 0 40px}
 .tagline h2{font-size:1.3rem;font-weight:700;color:rgba(255,255,255,.9)}
@@ -88,11 +91,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 <div class="container">
 
   <div class="header">
-    <div class="logo-row">
-      <div class="logo-icon">L</div>
-      <div class="logo-text">Leños <span>&</span> Carbón</div>
+    <div class="brand-logo">
+      <div class="brand-logo-main">
+        <div class="brand-logo-text">
+          <span class="brand-logo-dot"></span>
+          Leños <span class="amp">&</span> Carbón
+          <span class="brand-logo-dot"></span>
+        </div>
+      </div>
+      <div class="brand-logo-year">1998</div>
     </div>
-    <div class="subtitle">Maestros Parrilleros</div>
   </div>
 
   <div class="tagline">
