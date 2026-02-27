@@ -41,30 +41,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .card-preview{width:100%;aspect-ratio:4/3;border-radius:12px;margin-bottom:16px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
 .card-preview-inner{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:.7rem;color:rgba(255,255,255,.4)}
 
-/* Mini preview for v1 */
-.preview-v1{background:linear-gradient(135deg,#8B2500,#5C1A00);padding:12px}
-.preview-v1 .pv-bar{height:6px;background:rgba(255,255,255,.15);border-radius:3px;margin-bottom:6px}
-.preview-v1 .pv-nav{display:flex;gap:4px;margin-bottom:8px}
-.preview-v1 .pv-nav span{height:5px;border-radius:3px;background:rgba(255,255,255,.2);flex:1}
-.preview-v1 .pv-nav span:first-child{background:rgba(232,122,32,.6)}
-.preview-v1 .pv-item{display:flex;gap:6px;margin-bottom:5px;align-items:center}
-.preview-v1 .pv-dot{width:16px;height:16px;border-radius:4px;background:rgba(255,255,255,.1);flex-shrink:0}
-.preview-v1 .pv-lines{flex:1}
-.preview-v1 .pv-line{height:3px;background:rgba(255,255,255,.12);border-radius:2px;margin-bottom:3px}
-.preview-v1 .pv-line:last-child{width:60%}
-
-/* Mini preview for v2 */
-.preview-v2{background:linear-gradient(135deg,#F8F9FB,#EEF0F4);padding:12px}
-.preview-v2 .pv-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.preview-v2 .pv-logo{width:12px;height:12px;border-radius:3px;background:#E87A20}
-.preview-v2 .pv-bell{width:10px;height:10px;border-radius:50%;background:#ddd}
-.preview-v2 .pv-search{height:8px;background:#E5E7EB;border-radius:4px;margin-bottom:8px}
-.preview-v2 .pv-card-lg{height:28px;border-radius:6px;background:linear-gradient(135deg,#4A2810,#8B4513);margin-bottom:6px}
-.preview-v2 .pv-card-row{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:6px}
-.preview-v2 .pv-card-sm{height:22px;border-radius:5px}
-.preview-v2 .pv-card-sm:first-child{background:linear-gradient(135deg,#FF6B35,#F7931E)}
-.preview-v2 .pv-card-sm:last-child{background:linear-gradient(135deg,#8B4513,#D2691E)}
-.preview-v2 .pv-special{height:12px;background:#fff;border-radius:4px;border:1px solid #E5E7EB}
+/* Card preview images */
+.card-preview img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.card:hover .card-preview img{transform:scale(1.05)}
+.card-preview .preview-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.4) 0%,transparent 50%);pointer-events:none}
+.preview-v1{background:linear-gradient(135deg,#8B2500,#5C1A00)}
+.preview-v2{background:linear-gradient(135deg,#F8F9FB,#EEF0F4)}
 
 .card-title{font-size:1.15rem;font-weight:800;margin-bottom:6px}
 .card-desc{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.5;flex:1}
@@ -113,13 +95,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
     <a class="card" href="v1.html" style="--accent:#E87A20">
       <span class="card-badge">Versión 1</span>
       <div class="card-preview preview-v1">
-        <div class="card-preview-inner" style="width:100%;padding:0">
-          <div class="pv-bar" style="width:60%;margin:0 auto 6px"></div>
-          <div class="pv-nav"><span></span><span></span><span></span><span></span></div>
-          <div class="pv-item"><div class="pv-dot"></div><div class="pv-lines"><div class="pv-line"></div><div class="pv-line"></div></div></div>
-          <div class="pv-item"><div class="pv-dot"></div><div class="pv-lines"><div class="pv-line"></div><div class="pv-line"></div></div></div>
-          <div class="pv-item"><div class="pv-dot"></div><div class="pv-lines"><div class="pv-line"></div><div class="pv-line"></div></div></div>
-        </div>
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=500&h=375&fit=crop&q=70" alt="Parrilla de carnes">
+        <div class="preview-overlay"></div>
       </div>
       <div class="card-title">Menú Clásico</div>
       <div class="card-desc">Vista completa del menú en una sola página con scroll continuo y navegación por categorías.</div>
@@ -135,13 +112,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
     <a class="card" href="v2.html" style="--accent:#3B82F6">
       <span class="card-badge" style="color:#3B82F6">Versión 2</span>
       <div class="card-preview preview-v2">
-        <div class="card-preview-inner" style="width:100%;padding:0">
-          <div class="pv-topbar"><div class="pv-logo"></div><div class="pv-bell"></div></div>
-          <div class="pv-search"></div>
-          <div class="pv-card-lg"></div>
-          <div class="pv-card-row"><div class="pv-card-sm"></div><div class="pv-card-sm"></div></div>
-          <div class="pv-special"></div>
-        </div>
+        <img src="https://images.unsplash.com/photo-1599662662614-e1c56e0ba303?w=500&h=375&fit=crop&q=70" alt="Parrilla y chorizos">
+        <div class="preview-overlay"></div>
       </div>
       <div class="card-title">Menú App</div>
       <div class="card-desc">Experiencia tipo aplicación con navegación por categorías, subcategorías y vista detallada.</div>
