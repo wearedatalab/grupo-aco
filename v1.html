@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Leños & Carbón - Menú Digital</title>
+<meta name="description" content="Menú digital de Leños & Carbón - Maestros Parrilleros">
+<meta name="theme-color" content="#8B2500">
+<style>
+/*──────────────────────────────────────────────
+  VARIABLES Y RESET
+──────────────────────────────────────────────*/
+:root {
+  --color-primary: #8B2500;
+  --color-primary-light: #B8450A;
+  --color-accent: #E87A20;
+  --color-accent-light: #F5A623;
+  --color-bg: #FDF6EC;
+  --color-bg-card: #FFFFFF;
+  --color-text: #2D1B0E;
+  --color-text-light: #6B5B4F;
+  --color-text-muted: #9B8B7F;
+  --color-border: #E8DDD0;
+  --color-price: #8B2500;
+  --color-badge-new: #27AE60;
+  --color-badge-popular: #E87A20;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.1);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,.12);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --max-width: 800px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-main);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*──────────────────────────────────────────────
+  HEADER
+──────────────────────────────────────────────*/
+.header {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #5C1A00 100%);
+  color: #fff;
+  text-align: center;
+  padding: 2rem 1rem 1.2rem;
+  position: relative;
+  overflow: hidden;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0; right: 0;
+  height: 20px;
+  background: var(--color-bg);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+.header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: .15rem;
+}
+.header h1 span { color: var(--color-accent); }
+.header .subtitle {
+  font-size: .85rem;
+  opacity: .85;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/*──────────────────────────────────────────────
+  BUSQUEDA
+──────────────────────────────────────────────*/
+.search-wrap {
+  max-width: var(--max-width);
+  margin: -10px auto 0;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 10;
+}
+.search-box {
+  width: 100%;
+  padding: 14px 16px 14px 44px;
+  border: 2px solid var(--color-border);
+  border-radius: 50px;
+  font-size: 1rem;
+  background: #fff;
+  box-shadow: var(--shadow-md);
+  outline: none;
+  transition: border-color .2s;
+  font-family: var(--font-main);
+}
+.search-box:focus { border-color: var(--color-accent); }
+.search-icon {
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+/*──────────────────────────────────────────────
+  NAVEGACION DE CATEGORIAS
+──────────────────────────────────────────────*/
+.cat-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0;
+}
+.cat-nav-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  gap: 2px;
+  padding: 8px 12px;
+}
+.cat-nav-inner::-webkit-scrollbar { display: none; }
+.cat-btn {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-light);
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: all .2s;
+  white-space: nowrap;
+  font-family: var(--font-main);
+}
+.cat-btn:hover { background: rgba(139,37,0,.08); color: var(--color-primary); }
+.cat-btn.active {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/*──────────────────────────────────────────────
+  CONTENEDOR PRINCIPAL
+──────────────────────────────────────────────*/
+.main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/*──────────────────────────────────────────────
+  SECCION DE CATEGORIA
+──────────────────────────────────────────────*/
+.menu-section {
+  margin-bottom: 2rem;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  margin-bottom: 1rem;
+  padding-bottom: .5rem;
+  border-bottom: 2px solid var(--color-accent);
+}
+.section-icon { font-size: 1.5rem; }
+.section-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.section-subtitle {
+  font-size: .8rem;
+  color: var(--color-text-muted);
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+/*──────────────────────────────────────────────
+  TARJETA DE PRODUCTO
+──────────────────────────────────────────────*/
+.menu-item {
+  background: var(--color-bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: .75rem;
+  overflow: hidden;
+  transition: box-shadow .2s;
+}
+.menu-item:hover { box-shadow: var(--shadow-md); }
+.item-main {
+  display: flex;
+  padding: 1rem;
+  gap: .9rem;
+  cursor: pointer;
+  align-items: flex-start;
+}
+.item-img {
+  width: 75px;
+  height: 75px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #f0e6d8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+.item-info { flex: 1; min-width: 0; }
+.item-name-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: .5rem;
+}
+.item-name {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+.item-price {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-price);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.item-desc {
+  font-size: .78rem;
+  color: var(--color-text-light);
+  margin-top: 3px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.item-badges {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+.badge {
+  font-size: .65rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+}
+.badge-new { background: #E8F8EE; color: #1B7A3D; }
+.badge-popular { background: #FFF3E0; color: #BF6D0A; }
+.badge-spicy { background: #FDECEA; color: #C62828; }
+
+/* Allergen tags */
+.allergen-tags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.allergen-tag {
+  font-size: .6rem;
+  padding: 1px 6px;
+  border-radius: 50px;
+  background: #F5F0EB;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+}
+
+/* Item detail (expandable) */
+.item-detail {
+  display: none;
+  padding: 0 1rem 1rem;
+  border-top: 1px dashed var(--color-border);
+  margin-top: 0;
+}
+.item-detail.open { display: block; }
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: .82rem;
+}
+.detail-label { color: var(--color-text-light); }
+.detail-value { font-weight: 600; }
+.allergen-info {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: #FFF8E1;
+  border-radius: var(--radius-sm);
+  font-size: .78rem;
+  color: #8D6E00;
+}
+.allergen-info strong { color: #6D5000; }
+
+/*──────────────────────────────────────────────
+  INFO BOX (acompañamientos, términos, etc.)
+──────────────────────────────────────────────*/
+.info-box {
+  background: linear-gradient(135deg, #FFF8EE, #FDF2E4);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size: .85rem;
+}
+.info-box h4 {
+  color: var(--color-primary);
+  margin-bottom: .4rem;
+  font-size: .9rem;
+}
+.info-box ul {
+  list-style: none;
+  columns: 2;
+  gap: .3rem;
+}
+.info-box li::before { content: '• '; color: var(--color-accent); font-weight: bold; }
+.info-box li { font-size: .8rem; color: var(--color-text-light); break-inside: avoid; }
+
+/*──────────────────────────────────────────────
+  COMBOS / KITS
+──────────────────────────────────────────────*/
+.kit-card {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #5C1A00 100%);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  margin-bottom: .75rem;
+}
+.kit-card .item-name { color: #fff; }
+.kit-card .item-price { color: var(--color-accent-light); font-size: 1.2rem; }
+.kit-card .item-desc { color: rgba(255,255,255,.8); }
+.kit-includes {
+  margin-top: .5rem;
+  font-size: .75rem;
+  opacity: .9;
+}
+.kit-includes span {
+  display: inline-block;
+  background: rgba(255,255,255,.15);
+  padding: 2px 8px;
+  border-radius: 50px;
+  margin: 2px 2px;
+}
+
+/*──────────────────────────────────────────────
+  NO RESULTADOS
+──────────────────────────────────────────────*/
+.no-results {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--color-text-muted);
+}
+.no-results .icon { font-size: 3rem; margin-bottom: .5rem; }
+.no-results p { font-size: .95rem; }
+
+/*──────────────────────────────────────────────
+  LEYENDA DE ALERGENOS
+──────────────────────────────────────────────*/
+.allergen-legend {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+.allergen-legend h3 {
+  font-size: .9rem;
+  color: var(--color-primary);
+  margin-bottom: .5rem;
+}
+.legend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 6px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .75rem;
+  color: var(--color-text-light);
+}
+.legend-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/*──────────────────────────────────────────────
+  FOOTER
+──────────────────────────────────────────────*/
+.footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--color-text-muted);
+  font-size: .75rem;
+  border-top: 1px solid var(--color-border);
+  margin-top: 2rem;
+}
+.footer a { color: var(--color-primary); text-decoration: none; }
+.footer .phone { font-size: 1.1rem; font-weight: 700; color: var(--color-primary); display: block; margin: .5rem 0; }
+
+/*──────────────────────────────────────────────
+  SCROLL TO TOP
+──────────────────────────────────────────────*/
+.scroll-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all .3s;
+  z-index: 50;
+}
+.scroll-top.visible { opacity: 1; transform: translateY(0); }
+
+/*──────────────────────────────────────────────
+  RESPONSIVE
+──────────────────────────────────────────────*/
+@media (max-width: 480px) {
+  .header h1 { font-size: 1.5rem; }
+  .item-img { width: 60px; height: 60px; }
+  .item-name { font-size: .88rem; }
+  .info-box ul { columns: 1; }
+}
+@media (min-width: 600px) {
+  .header h1 { font-size: 2.5rem; }
+  .item-main { padding: 1.1rem 1.2rem; }
+}
+
+/* Print styles */
+@media print {
+  .cat-nav, .search-wrap, .scroll-top { display: none; }
+  .menu-item { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <h1>Leños <span>&</span> Carbón</h1>
+  <div class="subtitle">Maestros Parrilleros</div>
+</header>
+
+<div class="search-wrap">
+  <span class="search-icon">&#128269;</span>
+  <input type="search" class="search-box" placeholder="Buscar en el menú..." id="searchInput" autocomplete="off">
+</div>
+
+<nav class="cat-nav" id="catNav">
+  <div class="cat-nav-inner" id="catNavInner"></div>
+</nav>
+
+<main class="main" id="menuContainer"></main>
+
+<button class="scroll-top" id="scrollTopBtn" aria-label="Volver arriba">&#8593;</button>
+
+<footer class="footer">
+  <p><strong>Leños & Carbón</strong> - Maestros Parrilleros</p>
+  <a href="tel:018000113383" class="phone">01 8000 113383</a>
+  <p>Menú válido a partir de noviembre de 2024</p>
+  <p style="margin-top:.5rem">Los precios incluyen impuestos y son en pesos colombianos.</p>
+  <p style="margin-top:.3rem">Prohibido el expendio de bebidas embriagantes a menores de edad. El exceso de alcohol es perjudicial para la salud.</p>
+</footer>
+
+<script>
+/*╔══════════════════════════════════════════════════════════════╗
+  ║  DATOS DEL MENÚ - EDITAR AQUÍ PARA ACTUALIZAR EL MENÚ     ║
+  ║                                                              ║
+  ║  Cada categoría tiene:                                       ║
+  ║    - id: identificador único (no cambiar)                    ║
+  ║    - nombre: nombre de la categoría                          ║
+  ║    - icono: emoji representativo                             ║
+  ║    - descripcion: texto opcional bajo el título              ║
+  ║    - items: lista de productos                               ║
+  ║                                                              ║
+  ║  Cada producto tiene:                                        ║
+  ║    - nombre: nombre del plato                                ║
+  ║    - precio: precio en pesos (número)                        ║
+  ║    - desc: descripción del plato                             ║
+  ║    - icono: emoji del plato                                  ║
+  ║    - alergenos: lista de alérgenos                           ║
+  ║      (gluten, lacteos, huevo, pescado, mariscos, frutos_secos)║
+  ║    - tags: etiquetas opcionales ("nuevo", "popular", "picante")║
+  ║    - peso: peso en gramos (opcional)                         ║
+  ║                                                              ║
+  ║  Para agregar un producto, copiar uno existente y cambiar    ║
+  ║  los datos. Para eliminar, borrar el bloque entre { }        ║
+  ╚══════════════════════════════════════════════════════════════╝*/
+
+const MENU_DATA = [
+  {
+    id: "entradas",
+    nombre: "Entradas",
+    icono: "🥟",
+    items: [
+      { nombre: "Aborrajados", precio: 9900, desc: "4 uds de plátano maduro en bolitas apanadas de 40 g con una salsa rosa, rellenos de queso, acompañados de ají y limón.", icono: "🍌", alergenos: ["gluten", "lacteos"], tags: [] },
+      { nombre: "Maduro Leños", precio: 12500, desc: "Plátano maduro de 400 g y arequipe, relleno de queso doble crema y bocadillo derretido, terminado con ralladura de queso campesino.", icono: "🧀", alergenos: ["lacteos"], tags: ["popular"] },
+      { nombre: "Morcillas a la Parrilla", precio: 14900, desc: "120 g. Dos morcillas de arroz a la parrilla con 2 limones y ají de la casa.", icono: "🌭", alergenos: [], tags: [] },
+      { nombre: "Patacones con Hogao", precio: 16900, desc: "6 patacones acompañados con hogao.", icono: "🫓", alergenos: [], tags: [] },
+      { nombre: "Empanadas de Carne o Mix de Quesos", precio: 9900, desc: "4 empanadas de 40 g aprox. acompañadas con ají de la casa y limón.", icono: "🥟", alergenos: ["gluten"], tags: [] },
+      { nombre: "Chorizos Leños", precio: 21900, desc: "3 chorizos de 60 g cada uno a la parrilla con arepas de maíz.", icono: "🌭", alergenos: [], tags: ["popular"] },
+      { nombre: "Chicharrón", precio: 24900, desc: "120 g de chicharrón acompañados con arepas de maíz y guacamole.", icono: "🥓", alergenos: [], tags: [] }
+    ]
+  },
+  {
+    id: "sopas",
+    nombre: "Sopas",
+    icono: "🍲",
+    items: [
+      { nombre: "Sopa de Guineo Verde", precio: 10900, desc: "Sopa tradicional con guineo verde.", icono: "🍲", alergenos: [], tags: [] },
+      { nombre: "Sopa de Lentejas con Chorizo a la Parrilla", precio: 12900, desc: "Sopa de lentejas acompañada con chorizo a la parrilla.", icono: "🍲", alergenos: [], tags: [] },
+      { nombre: "Consomé de Pollo", precio: 10900, desc: "Pollo en trozos, papa en cascos, mazorca, picado de cebolla y cilantro con dos arepas de maíz.", icono: "🐔", alergenos: [], tags: [] },
+      { nombre: "Consomé de Carne", precio: 14900, desc: "Carne en trozos con cuadritos, picado de cebolla y cilantro con dos arepas de maíz.", icono: "🥩", alergenos: [], tags: [] },
+      { nombre: "Sopa de Tomates a la Parrilla", precio: 15900, desc: "Sopa de tomates asados a la parrilla, acompañada de crutones y queso parmesano.", icono: "🍅", alergenos: ["gluten", "lacteos"], tags: [] }
+    ]
+  },
+  {
+    id: "ensaladas",
+    nombre: "Ensaladas",
+    icono: "🥗",
+    items: [
+      { nombre: "Parrillera", precio: 18900, desc: "Lechuga en trozos, aguacate en cubos, tomates cherry, zucchini y chips de zanahoria acompañados de salsa vinagreta.", icono: "🥗", alergenos: [], tags: [] },
+      { nombre: "De Pollo Parrillada", precio: 27900, desc: "150 g de churrasco de pollo, lechuga en trozos, aguacate en cubos, tomates cherry, zucchini y chips de zanahoria acompañados de salsa vinagreta.", icono: "🍗", alergenos: [], tags: ["popular"] },
+      { nombre: "De Res Parrillada", precio: 28900, desc: "100 g de bife de paleta, lechuga en trozos, aguacate en cubos, tomates cherry, zucchini y chips de zanahoria acompañados de salsa vinagreta.", icono: "🥩", alergenos: [], tags: [] },
+      { nombre: "De Camarones Parrillados", precio: 29900, desc: "100 g de camarones, lechuga en trozos, aguacate en cubos, tomates cherry, zucchini y chips de zanahoria acompañados de salsa vinagreta.", icono: "🦐", alergenos: ["mariscos"], tags: [] },
+      { nombre: "De Salmón Parrillado", precio: 36900, desc: "100 g de salmón, lechuga en trozos, aguacate en cubos, tomates cherry, zucchini y chips de zanahoria acompañados de salsa vinagreta.", icono: "🐟", alergenos: ["pescado"], tags: [] }
+    ]
+  },
+  {
+    id: "cotidianos",
+    nombre: "Los Cotidianos",
+    icono: "🍽️",
+    descripcion: "Acompaña tu cotidiano adicionando: Bebida por $5,000 | Sopa por $5,000 | Bebida y sopa por $7,000",
+    items: [
+      { nombre: "Calentado de Lentejas y Chorizo a la Parrilla", precio: 20900, desc: "Calentado de lentejas acompañado con chorizo a la parrilla.", icono: "🍛", alergenos: [], tags: [] },
+      { nombre: "Picada Parrillada", precio: 22900, desc: "80 g de carne de cerdo, 100 g de carne de res cortada en rodajas, acompañado de 2 arepas de maíz y plátano frito.", icono: "🥘", alergenos: [], tags: [] },
+      { nombre: "Filete de Pollo a la Parrilla", precio: 25900, desc: "Filete de pollo a la parrilla con acompañamientos tradicionales a elección.", icono: "🍗", alergenos: [], tags: [] },
+      { nombre: "Bistec Colombiano", precio: 26900, desc: "150 g de falda de paleta con salsa criolla, un huevo frito, acompañados de arroz y ensalada de cebolla y tomate.", icono: "🥩", alergenos: ["huevo"], tags: ["popular"] }
+    ]
+  },
+  {
+    id: "picadas",
+    nombre: "Picadas",
+    icono: "🍖",
+    items: [
+      { nombre: "Picada Individual", precio: 32900, desc: "100 g de pollo, 60 g de carne de res o carne de cerdo, 50 g de costilla de cerdo, plátano maduro en rodajas, morcilla, papas criollas.", icono: "🍖", alergenos: [], tags: [] },
+      { nombre: "Media Picada Leños", precio: 52900, desc: "100 g de carne de res, 100 g de carne de cerdo, un chorizo de 60 g y costilla de cerdo, papas criollas, arepa, cebolla, tomate en cascos y salsa rosada. Más salsas para una persona.", icono: "🍖", alergenos: [], tags: ["popular"] },
+      { nombre: "Picada Súper Leños", precio: 76900, desc: "140 g de carne de res, 300 g de churrasco de pollo, 50 g de bondiola de cerdo, 130 g de costilla de cerdo, plátano maduro, 250 g de papa en cascos, arepas de cebolla, tomate y huevo frito.", icono: "🍖", alergenos: ["huevo"], tags: [] },
+      { nombre: "Picada Leños \"La de Siempre\"", precio: 79900, desc: "250 g de costilla de cerdo ahumada, 200 g de lomo de res, 100 g de carne de cerdo, 1 chorizo de 60 g y patacones, morcilla de plátano, más arepa en cascos, cebolla, tomate y salsa.", icono: "🍖", alergenos: [], tags: ["popular"] }
+    ]
+  },
+  {
+    id: "otras",
+    nombre: "Otras Opciones",
+    icono: "🔥",
+    items: [
+      { nombre: "Brochetas de Res o Pollo", precio: 25900, desc: "150 g de bife de paleta o 150 g de filete, 150 g de filete con cebolla en trozos, pimentón y zucchini parrillados en trozos y 2 acompañamientos tradicionales a elección.", icono: "🫕", alergenos: [], tags: [] },
+      { nombre: "Medio Especial Leños", precio: 40900, desc: "70 g de carne de res bañada en chimichurri, 50 g de lomo de cerdo, 30 g de filete de bechuga de pollo bañado en salsa BBQ, 50 g de costilla de cerdo ahumada y 2 arepas de maíz.", icono: "🥩", alergenos: [], tags: [] },
+      { nombre: "Especial Leños", precio: 59900, desc: "160 g de carne de res bañada en chimichurri, 100 g de lomo de cerdo, 80 g de filete de bechuga de pollo y 80 g de costilla de cerdo ahumada incluye 3 acompañamientos.", icono: "🥩", alergenos: [], tags: ["popular"] }
+    ]
+  },
+  {
+    id: "hamburguesas",
+    nombre: "Hamburguesas",
+    icono: "🍔",
+    items: [
+      { nombre: "Hamburguesa Clásica", precio: 25900, desc: "180 g de carne de res con una tajada de queso doble crema, tomate en rodajas, cebolla en rodajas, lechuga y salsa BBQ en pan brioche.", icono: "🍔", alergenos: ["gluten", "lacteos"], tags: ["popular"] },
+      { nombre: "Hamburguesa Parrillera", precio: 25900, desc: "150 g de carne de res con una tajada de queso doble crema, cebolla grillé y salsa BBQ en pan brioche.", icono: "🍔", alergenos: ["gluten", "lacteos"], tags: [] },
+      { nombre: "Combo Hamburguesa", precio: 31900, desc: "Cualquier hamburguesa con una porción de papa en cascos o papas chips y gaseosa o limonada natural.", icono: "🍔", alergenos: ["gluten", "lacteos"], tags: ["popular"] }
+    ]
+  },
+  {
+    id: "sandwiches",
+    nombre: "Sándwiches",
+    icono: "🥪",
+    descripcion: "Lleva tu sándwich en combo por $7,000 adicionales: incluye porción de papa en cascos o papas chips, salsa de ají y gaseosa o limonada natural.",
+    items: [
+      { nombre: "Choripán", precio: 18900, desc: "2 chorizos parrilleros de 60 g cada uno con chimichurri y una tajada de queso doble crema. No incluye vegetales.", icono: "🌭", alergenos: ["gluten", "lacteos"], tags: [] },
+      { nombre: "De Pollo a la Parrilla", precio: 20900, desc: "165 g de pollo en julianas con salsa BBQ.", icono: "🍗", alergenos: ["gluten"], tags: [] },
+      { nombre: "De Bondiola de Cerdo", precio: 22900, desc: "150 g de bondiola de cerdo.", icono: "🐷", alergenos: ["gluten"], tags: [] },
+      { nombre: "De Morrillo a la Parrilla", precio: 23900, desc: "100 g de corte de res en julianas con chimichurri.", icono: "🥩", alergenos: ["gluten"], tags: [] },
+      { nombre: "De Bife de Res a la Parrilla", precio: 23900, desc: "100 g de corte de res en julianas con chimichurri.", icono: "🥩", alergenos: ["gluten"], tags: [] },
+      { nombre: "De Bombón de Cerdo a la Parrilla", precio: 24900, desc: "100 g de pernil de cerdo.", icono: "🐷", alergenos: ["gluten"], tags: [] },
+      { nombre: "De Churrasco de Res a la Parrilla", precio: 27900, desc: "120 g de churrasco con chimichurri.", icono: "🥩", alergenos: ["gluten"], tags: ["popular"] },
+      { nombre: "De Costillas St. Louis", precio: 28900, desc: "90 g de costillas con salsa BBQ.", icono: "🍖", alergenos: ["gluten"], tags: [] }
+    ]
+  },
+  {
+    id: "calentados",
+    nombre: "Calentados",
+    icono: "🍳",
+    descripcion: "No incluyen acompañamientos.",
+    items: [
+      { nombre: "Calentado de Lomo de Cerdo a la Parrilla", precio: 26900, desc: "550 g de arroz con frijoles, 100 g de carne de cerdo, plátano maduro en cuadritos, acompañado de 2 arepas de maíz y un huevo frito.", icono: "🐷", alergenos: ["huevo"], tags: [] },
+      { nombre: "Calentado de Res a la Parrilla", precio: 28900, desc: "550 g de arroz con frijoles, 100 g de carne de res, plátano maduro en cuadritos, acompañado de 2 arepas de maíz y un huevo frito.", icono: "🥩", alergenos: ["huevo"], tags: [] },
+      { nombre: "Calentado Paisa", precio: 31900, desc: "550 g de arroz con frijoles, 100 g de carne de res, plátano maduro en cuadritos y 200 g de chicharrón, 2 arepas de maíz, un huevo frito y una tajada de aguacate.", icono: "🍳", alergenos: ["huevo"], tags: ["popular"] },
+      { nombre: "Súper Calentado Paisa", precio: 37900, desc: "850 g de arroz con frijoles, 200 g de carne, plátano maduro en cuadritos y 250 g de chicharrón más 2 huevos fritos y tajada de aguacate.", icono: "🍳", alergenos: ["huevo"], tags: [] }
+    ]
+  },
+  {
+    id: "parrilleritos",
+    nombre: "Parrilleritos - Menú Infantil",
+    icono: "👶",
+    items: [
+      { nombre: "Filete de Pollo Apanado", precio: 24900, desc: "80 g de filete de pollo apanado con papas chips y un vasito de helado de 60 g, el sabor estará sujeto a disponibilidad del restaurante.", icono: "🍗", alergenos: ["gluten", "lacteos"], tags: [] }
+    ]
+  },
+  {
+    id: "parrilla-res",
+    nombre: "Nuestra Parrilla - Res",
+    icono: "🥩",
+    descripcion: "Maridaje con Vino Tinto. Incluye 3 acompañamientos tradicionales. Nuestras carnes son maduradas. Pídelas en tu término: Azul, Medio, Tres Cuartos o Bien Cocido.",
+    items: [
+      { nombre: "Colita de Cuadril", precio: 36900, desc: "200 g de corte de res, en término. Tiempo máximo de cocción 1/4.", icono: "🥩", alergenos: [], tags: [] },
+      { nombre: "Morrillo", precio: 36900, desc: "300 g de morrillo de res en cocción. Aprox 1:10 horas de parrilla con condimentos.", icono: "🥩", alergenos: [], tags: [] },
+      { nombre: "Bife de Paleta", precio: 42900, desc: "300 g de carne de res, corte jugoso.", icono: "🥩", alergenos: [], tags: ["popular"] },
+      { nombre: "Bistec a Caballo", precio: 46900, desc: "350 g de bistec con huevo frito y acompañamientos tradicionales.", icono: "🥩", alergenos: ["huevo"], tags: [] },
+      { nombre: "Churrasco", precio: 50900, desc: "350 g de churrasco de res a la parrilla.", icono: "🥩", alergenos: [], tags: ["popular"] },
+      { nombre: "Punta de Anca", precio: 53900, desc: "Término máximo de cocción 3/4. Disponible en 200 g y 350 g.", icono: "🥩", alergenos: [], tags: ["popular"] },
+      { nombre: "Súper Punta de Anca", precio: 53900, desc: "400 g de punta de anca premium.", icono: "🥩", alergenos: [], tags: [] },
+      { nombre: "Baby Beef", precio: 54900, desc: "350 g de baby beef a la parrilla.", icono: "🥩", alergenos: [], tags: [] },
+      { nombre: "Filet Mignon", precio: 69900, desc: "Porción premium. Cortes de res de 115 g cada uno. Aprox a la parrilla servidos en tabla.", icono: "🥩", alergenos: [], tags: [] },
+      { nombre: "Bife Chorizo", precio: 69900, desc: "Corte premium de res a la parrilla.", icono: "🥩", alergenos: [], tags: [] }
+    ]
+  },
+  {
+    id: "adiciones-res",
+    nombre: "Adiciones a tu Plato",
+    icono: "➕",
+    items: [
+      { nombre: "Encebollado", precio: 5900, desc: "Cebolla grillada para acompañar tu corte.", icono: "🧅", alergenos: [], tags: [] },
+      { nombre: "Salsa a la Pimienta", precio: 6300, desc: "Salsa cremosa de pimienta.", icono: "🫙", alergenos: ["lacteos"], tags: [] },
+      { nombre: "Salsa de Champiñones", precio: 7300, desc: "Salsa de champiñones frescos.", icono: "🍄", alergenos: ["lacteos"], tags: [] },
+      { nombre: "Bistec a Caballo (adición)", precio: 8300, desc: "Huevo frito adicional para tu plato.", icono: "🍳", alergenos: ["huevo"], tags: [] },
+      { nombre: "Cebolla, Tomate y un Huevo Frito", precio: 8300, desc: "Complemento para tu corte de carne.", icono: "🥚", alergenos: ["huevo"], tags: [] }
+    ]
+  },
+  {
+    id: "parrilla-cerdo",
+    nombre: "Nuestra Parrilla - Cerdo",
+    icono: "🐷",
+    descripcion: "Maridaje con Vino Rosé o Tinto. Incluye 3 acompañamientos tradicionales.",
+    items: [
+      { nombre: "Chuleta Valluna de Cerdo", precio: 33900, desc: "250 g de chuleta de cerdo apanada.", icono: "🐷", alergenos: ["gluten"], tags: [] },
+      { nombre: "Bondiola de Cerdo", precio: 38900, desc: "300 g de lomo de cerdo bañado en salsa BBQ o chimichurri.", icono: "🐷", alergenos: [], tags: ["popular"] },
+      { nombre: "Mix Costillas", precio: 38900, desc: "150 g costillas St. Louis y 150 g costillas ahumadas, arroz, en salsa BBQ acompañados de papas criollas y dos acompañamientos tradicionales.", icono: "🍖", alergenos: [], tags: [] },
+      { nombre: "Bombones de Cerdo", precio: 38900, desc: "Dos bombones de cerdo de 160 g c/u, horneados y terminados a la parrilla, acompañados con ensalada de la casa y salsa BBQ.", icono: "🍖", alergenos: [], tags: [] },
+      { nombre: "Tomahawk", precio: 41900, desc: "Chuleta de cerdo de 300 g con presentación tipo tomahawk, acompañada de mantequilla de finas hierbas.", icono: "🐷", alergenos: ["lacteos"], tags: ["nuevo"] },
+      { nombre: "Costillas St. Louis en Salsa BBQ", precio: 42900, desc: "250 g (1/3 rack).", icono: "🍖", alergenos: [], tags: ["popular"] },
+      { nombre: "Medallones de Cerdo", precio: 46900, desc: "3 medallones de 100 g cada uno, aprox. bañados en salsa BBQ.", icono: "🐷", alergenos: [], tags: [] },
+      { nombre: "Costilla de Cerdo Ahumada", precio: 52900, desc: "Costilla ahumada en salsa BBQ.", icono: "🍖", alergenos: [], tags: [] }
+    ]
+  },
+  {
+    id: "parrilla-pescado",
+    nombre: "Nuestra Parrilla - Pescado",
+    icono: "🐟",
+    descripcion: "Maridaje con Vino Blanco. *Incluye dos acompañamientos tradicionales.",
+    items: [
+      { nombre: "Trucha a la Plancha", precio: 39900, desc: "400 g de trucha a la plancha.", icono: "🐟", alergenos: ["pescado"], tags: [], peso: "400g" },
+      { nombre: "Trucha Ajillo Camarón", precio: 51900, desc: "400 g de trucha con salsa al ajillo y camarones.", icono: "🐟", alergenos: ["pescado", "mariscos"], tags: ["popular"], peso: "400g" },
+      { nombre: "Trucha Criolla Camarón", precio: 51900, desc: "400 g de trucha con salsa criolla y camarones.", icono: "🐟", alergenos: ["pescado", "mariscos"], tags: [], peso: "400g" },
+      { nombre: "Salmón a la Parrilla", precio: 54900, desc: "240 g de salmón a la parrilla.", icono: "🐟", alergenos: ["pescado"], tags: [], peso: "240g" },
+      { nombre: "Salmón Ajillo Camarón", precio: 71900, desc: "240 g de salmón con salsa al ajillo y camarones.", icono: "🐟", alergenos: ["pescado", "mariscos"], tags: [], peso: "240g" },
+      { nombre: "Salmón Salsa Criolla Camarón", precio: 71900, desc: "240 g de salmón con salsa criolla y camarones.", icono: "🐟", alergenos: ["pescado", "mariscos"], tags: [], peso: "240g" }
+    ]
+  },
+  {
+    id: "parrilla-pollo",
+    nombre: "Nuestra Parrilla - Pollo",
+    icono: "🍗",
+    descripcion: "Maridaje con Vino Blanco. Incluye 3 acompañamientos tradicionales.",
+    items: [
+      { nombre: "Churrasco de Pollo", precio: 31900, desc: "200 g de churrasco de pollo a la parrilla con acompañamientos y salsas.", icono: "🍗", alergenos: [], tags: [] },
+      { nombre: "Filete de Pollo a la Parrilla", precio: 38900, desc: "250 g de filete de pollo a la parrilla.", icono: "🍗", alergenos: [], tags: [] },
+      { nombre: "Medio Pollo a la Parrilla", precio: 38900, desc: "Medio pollo a la parrilla, aprox 2 presas de pollo.", icono: "🍗", alergenos: [], tags: ["popular"] },
+      { nombre: "Pollo Caprese a la Parrilla", precio: 43900, desc: "Filete de pollo con tomate, queso mozzarella y albahaca.", icono: "🍗", alergenos: ["lacteos"], tags: [] },
+      { nombre: "Filete de Pollo Florentino", precio: 44900, desc: "Filete de pollo con espinacas y salsa.", icono: "🍗", alergenos: ["lacteos"], tags: [] }
+    ]
+  },
+  {
+    id: "postres",
+    nombre: "Postres",
+    icono: "🍰",
+    items: [
+      { nombre: "Vaso de Helado (1 bola)", precio: 6900, desc: "Un vaso con una bola de helado. Sabor sujeto a disponibilidad.", icono: "🍨", alergenos: ["lacteos"], tags: [] },
+      { nombre: "Vaso de Helado (2 bolas)", precio: 9900, desc: "Un vaso con dos bolas de helado. Sabor sujeto a disponibilidad.", icono: "🍨", alergenos: ["lacteos"], tags: [] },
+      { nombre: "Tentación Leños", precio: 9900, desc: "Postre especial de la casa.", icono: "🍫", alergenos: ["lacteos", "gluten"], tags: ["popular"] },
+      { nombre: "Postre de la Casa", precio: 10900, desc: "Postre del día, preguntar disponibilidad.", icono: "🍮", alergenos: ["lacteos"], tags: [] },
+      { nombre: "Queso a la Parrilla con Arequipe", precio: 14900, desc: "Queso campesino asado a la parrilla con arequipe.", icono: "🧀", alergenos: ["lacteos"], tags: ["popular"] },
+      { nombre: "Torta de Almojábana", precio: 17900, desc: "Torta tradicional de almojábana.", icono: "🍰", alergenos: ["lacteos", "gluten", "huevo"], tags: [] }
+    ]
+  },
+  {
+    id: "porciones",
+    nombre: "Porciones",
+    icono: "🥘",
+    items: [
+      { nombre: "Papa Cocida", precio: 3300, desc: "Porción de papa cocida.", icono: "🥔", alergenos: [], tags: [] },
+      { nombre: "Ensalada de la Casa", precio: 3300, desc: "Porción de ensalada fresca.", icono: "🥗", alergenos: [], tags: [] },
+      { nombre: "Arroz Leños", precio: 3200, desc: "Porción de arroz.", icono: "🍚", alergenos: [], tags: [] },
+      { nombre: "Maduro", precio: 3300, desc: "Porción de plátano maduro 200 g aprox.", icono: "🍌", alergenos: [], tags: [] },
+      { nombre: "Papa Criolla", precio: 6300, desc: "Porción de papa criolla 200 g.", icono: "🥔", alergenos: [], tags: [] },
+      { nombre: "Papa en Cascos", precio: 5300, desc: "Porción de papa en cascos 200 g.", icono: "🥔", alergenos: [], tags: [] },
+      { nombre: "Tocineta", precio: 5300, desc: "Porción de tocineta 100 g.", icono: "🥓", alergenos: [], tags: [] },
+      { nombre: "Guacamole", precio: 5300, desc: "Porción de guacamole 80 g.", icono: "🥑", alergenos: [], tags: [] }
+    ]
+  },
+  {
+    id: "bebidas",
+    nombre: "Bebidas",
+    icono: "🥤",
+    items: [
+      { nombre: "Limonada Natural", precio: 7900, desc: "Limonada natural refrescante.", icono: "🍋", alergenos: [], tags: [] },
+      { nombre: "Gaseosa Botella/Dispensador", precio: 7700, desc: "Gaseosa en botella o dispensador.", icono: "🥤", alergenos: [], tags: [] },
+      { nombre: "Nuestras Sodas", precio: 7700, desc: "Variedad de sodas.", icono: "🥤", alergenos: [], tags: [] },
+      { nombre: "Limonada de Coco", precio: 9800, desc: "Limonada con leche de coco.", icono: "🥥", alergenos: [], tags: ["popular"] },
+      { nombre: "Limonada de Guanábana", precio: 9800, desc: "Limonada con pulpa de guanábana.", icono: "🍋", alergenos: [], tags: [] },
+      { nombre: "Soda Hatsu", precio: 9800, desc: "Soda premium Hatsu.", icono: "🧃", alergenos: [], tags: [] },
+      { nombre: "Agua Hatsu en Gas 500 ml", precio: 7800, desc: "Agua con gas Hatsu.", icono: "💧", alergenos: [], tags: [] },
+      { nombre: "Jugos Naturales en Agua", precio: 8300, desc: "Jugo natural en agua.", icono: "🧃", alergenos: [], tags: [] },
+      { nombre: "Jugos Naturales en Leche", precio: 9300, desc: "Jugo natural en leche.", icono: "🥛", alergenos: ["lacteos"], tags: [] },
+      { nombre: "Limonada Cerezada", precio: 10900, desc: "Limonada con cereza.", icono: "🍒", alergenos: [], tags: [] },
+      { nombre: "Limonada de Mango Biche", precio: 10900, desc: "Limonada con mango biche.", icono: "🥭", alergenos: [], tags: [] }
+    ]
+  },
+  {
+    id: "bebidas-calientes",
+    nombre: "Bebidas Calientes",
+    icono: "☕",
+    items: [
+      { nombre: "Aromática de Hierbas", precio: 5200, desc: "Infusión caliente de hierbas.", icono: "🍵", alergenos: [], tags: [] },
+      { nombre: "Café Americano", precio: 5200, desc: "Café americano caliente.", icono: "☕", alergenos: [], tags: [] },
+      { nombre: "Aromática de Frutas", precio: 6200, desc: "Infusión caliente de frutas.", icono: "🍵", alergenos: [], tags: [] },
+      { nombre: "Cappuccino", precio: 7200, desc: "Cappuccino cremoso.", icono: "☕", alergenos: ["lacteos"], tags: [] },
+      { nombre: "Macchiato", precio: 6200, desc: "Café macchiato.", icono: "☕", alergenos: ["lacteos"], tags: [] },
+      { nombre: "Chocolate", precio: 7200, desc: "Chocolate caliente.", icono: "🍫", alergenos: ["lacteos"], tags: [] },
+      { nombre: "Amaretto", precio: 9200, desc: "Café con licor amaretto.", icono: "☕", alergenos: ["lacteos"], tags: [] }
+    ]
+  },
+  {
+    id: "cervezas",
+    nombre: "Cervezas",
+    icono: "🍺",
+    items: [
+      { nombre: "Andina", precio: 9900, desc: "Cerveza nacional.", icono: "🍺", alergenos: ["gluten"], tags: [] },
+      { nombre: "Águila Light", precio: 9500, desc: "Cerveza nacional light 330 ml.", icono: "🍺", alergenos: ["gluten"], tags: [] },
+      { nombre: "Club Colombia", precio: 9900, desc: "Cerveza nacional premium 330 ml.", icono: "🍺", alergenos: ["gluten"], tags: ["popular"] },
+      { nombre: "Jarra de Refajo", precio: 9900, desc: "Refajo en jarra.", icono: "🍺", alergenos: ["gluten"], tags: [] },
+      { nombre: "Heineken", precio: 14900, desc: "Cerveza importada 330 ml.", icono: "🍺", alergenos: ["gluten"], tags: [] },
+      { nombre: "Stella Artois", precio: 14900, desc: "Cerveza importada 330 ml.", icono: "🍺", alergenos: ["gluten"], tags: [] },
+      { nombre: "Corona Extra", precio: 14900, desc: "Cerveza importada 355 ml.", icono: "🍺", alergenos: ["gluten"], tags: [] }
+    ]
+  },
+  {
+    id: "vinos",
+    nombre: "Vinos",
+    icono: "🍷",
+    descripcion: "Casillero del Diablo - Copa vino del día $9,900",
+    items: [
+      { nombre: "Vino Tinto - Concha y Toro (Chile)", precio: 39900, desc: "Cabernet Sauvignon, botella.", icono: "🍷", alergenos: [], tags: [] },
+      { nombre: "Vino Tinto - Casillero del Diablo (Chile)", precio: 59900, desc: "Cabernet Sauvignon, botella.", icono: "🍷", alergenos: [], tags: ["popular"] },
+      { nombre: "Vino Tinto - Trivento (Argentina)", precio: 59900, desc: "Malbec, botella.", icono: "🍷", alergenos: [], tags: [] },
+      { nombre: "Vino Tinto - Marqués de la Colonia (Argentina)", precio: 79900, desc: "Malbec premium, botella.", icono: "🍷", alergenos: [], tags: [] },
+      { nombre: "Vino Tinto - Portillo Malbec (Argentina)", precio: 69900, desc: "Malbec, botella.", icono: "🍷", alergenos: [], tags: [] },
+      { nombre: "Vino Blanco - Concha y Toro", precio: 39900, desc: "Sauvignon Blanc, botella.", icono: "🥂", alergenos: [], tags: [] },
+      { nombre: "Vino Blanco - Casillero del Diablo", precio: 59900, desc: "Chardonnay, botella.", icono: "🥂", alergenos: [], tags: [] },
+      { nombre: "Vino Rosado - Saint Louis Burt (Francia)", precio: 89900, desc: "Rosé francés, botella.", icono: "🌸", alergenos: [], tags: [] },
+      { nombre: "Copa Vino del Día", precio: 9900, desc: "Pregunta por la disponibilidad de vino en copa.", icono: "🍷", alergenos: [], tags: [] }
+    ]
+  },
+  {
+    id: "cocteles",
+    nombre: "Cócteles",
+    icono: "🍹",
+    items: [
+      { nombre: "Gin Tonic", precio: 18900, desc: "Gin con agua tónica y botánicos.", icono: "🍸", alergenos: [], tags: [] },
+      { nombre: "Tinto de Verano", precio: 16900, desc: "Vino tinto con gaseosa de limón. Copa $16,900 / Jarra $31,900.", icono: "🍷", alergenos: [], tags: ["popular"] },
+      { nombre: "Blanco de Verano", precio: 18900, desc: "Vino blanco con sprite. Copa $18,900 / Jarra $31,900.", icono: "🥂", alergenos: [], tags: [] },
+      { nombre: "Fuego Leños", precio: 22900, desc: "Cóctel especial de la casa con toque picante. Copa $22,900 / Jarra $31,900.", icono: "🔥", alergenos: [], tags: ["popular"] },
+      { nombre: "Sucursal del Cielo", precio: 24900, desc: "Cóctel refrescante con combinación de licores y frutas.", icono: "🍹", alergenos: [], tags: [] },
+      { nombre: "Disaronno Leños", precio: 22900, desc: "Cóctel con licor Disaronno.", icono: "🍹", alergenos: [], tags: [] },
+      { nombre: "Sangría", precio: 14900, desc: "Sangría de frutas. Vaso $14,900 / Copa $22,900 / Jarra $41,900.", icono: "🍷", alergenos: [], tags: [] },
+      { nombre: "Mojito", precio: 20900, desc: "Mojito clásico. Copa $20,900 / Jarra $31,500.", icono: "🍹", alergenos: [], tags: [] },
+      { nombre: "Piña Colada", precio: 20900, desc: "Piña colada cremosa. Copa $20,900 / Jarra $31,500.", icono: "🍹", alergenos: ["lacteos"], tags: [] },
+      { nombre: "Margarita Leños", precio: 20900, desc: "Margarita estilo Leños. Frozen con Tequila Cuero Especial.", icono: "🍹", alergenos: [], tags: [] }
+    ]
+  },
+  {
+    id: "licores",
+    nombre: "Licores",
+    icono: "🥃",
+    items: [
+      { nombre: "Vodka Smirnoff", precio: 16900, desc: "Trago: $16,900 / Botella: $120,500.", icono: "🍸", alergenos: [], tags: [] },
+      { nombre: "Gordon's Gin", precio: 17900, desc: "Trago: $17,900 / Botella: $140,900.", icono: "🍸", alergenos: [], tags: [] },
+      { nombre: "Amaretto Disaronno", precio: 22900, desc: "Trago: $22,900 / Botella: $188,900.", icono: "🥃", alergenos: [], tags: [] },
+      { nombre: "José Cuervo Especial", precio: 22900, desc: "Trago: $22,900 / Botella: $161,900.", icono: "🥃", alergenos: [], tags: [] },
+      { nombre: "Johnnie Walker Red Label", precio: 14900, desc: "Trago: $14,900 / 1/2 Bot: $105,900 / Botella: $199,900.", icono: "🥃", alergenos: [], tags: [] },
+      { nombre: "Bailey's", precio: 13900, desc: "Trago: $13,900 / Botella: $124,900.", icono: "🥃", alergenos: ["lacteos"], tags: [] },
+      { nombre: "The Famous Grouse", precio: 12900, desc: "Trago.", icono: "🥃", alergenos: [], tags: [] },
+      { nombre: "Jack Daniel's", precio: 25900, desc: "Trago: $25,900 / Botella: $435,900.", icono: "🥃", alergenos: [], tags: [] },
+      { nombre: "Old Parr", precio: 25900, desc: "Trago: $25,900 / 1/2 Bot: $141,900 / Botella: $256,900.", icono: "🥃", alergenos: [], tags: [] },
+      { nombre: "Buchanan's", precio: 26900, desc: "Trago: $26,900 / Botella: $265,900.", icono: "🥃", alergenos: [], tags: ["popular"] },
+      { nombre: "Two Souls", precio: 26900, desc: "Trago.", icono: "🥃", alergenos: [], tags: [] },
+      { nombre: "Buchanan's Master", precio: 38900, desc: "Trago: $38,900 / Botella: $370,900.", icono: "🥃", alergenos: [], tags: [] },
+      { nombre: "Aguardiente", precio: 12900, desc: "Trago: $12,900 / 1/2 Bot: $59,900 / Botella: $102,900.", icono: "🥃", alergenos: [], tags: [] },
+      { nombre: "Ron", precio: 14900, desc: "Trago: $14,900 / Botella: $100,900.", icono: "🥃", alergenos: [], tags: [] }
+    ]
+  },
+  {
+    id: "kits",
+    nombre: "Kits Parrilleros para Llevar",
+    icono: "📦",
+    descripcion: "Conviértete en un experto del asado con nuestros kits parrilleros. Incluyen: 8 chorizos, 7 morcillas, 2 arepas, 20 arepas, 220 g guacamole, 220 g salsa BBQ y 220 g chimichurri.",
+    items: [
+      { nombre: "Kit 1 - Costilla St. Louis", precio: 129900, desc: "1400 g. 2 racks de costillas (sugerido para 4 personas).", icono: "📦", alergenos: [], tags: ["popular"] },
+      { nombre: "Kit 2 - Medallones de Cerdo", precio: 149900, desc: "150 g c/u (sugerido para 5 personas).", icono: "📦", alergenos: [], tags: [] },
+      { nombre: "Kit 3 - Punta de Anca", precio: 165900, desc: "230 g c/u (sugerido para 4 personas).", icono: "📦", alergenos: [], tags: [] },
+      { nombre: "Kit 4 - Baby Beef", precio: 180900, desc: "230 g c/u (sugerido para 6 personas).", icono: "📦", alergenos: [], tags: [] },
+      { nombre: "Kit 5 - Punta de Anca + Medallones de Cerdo", precio: 255900, desc: "Combinación premium para compartir.", icono: "📦", alergenos: [], tags: [] }
+    ]
+  },
+  {
+    id: "desayunos",
+    nombre: "Desayunos",
+    icono: "🌅",
+    items: [
+      { nombre: "Calentado de Chorizo con Lentejas", precio: 20900, desc: "Calentado con chorizo y lentejas.", icono: "🍳", alergenos: [], tags: [] },
+      { nombre: "Calentado de Lomo de Cerdo", precio: 26800, desc: "Calentado con lomo de cerdo a la parrilla.", icono: "🐷", alergenos: ["huevo"], tags: [] },
+      { nombre: "Calentado de Lomo de Res", precio: 26800, desc: "Calentado con lomo de res a la parrilla.", icono: "🥩", alergenos: ["huevo"], tags: [] },
+      { nombre: "Calentado Paisa", precio: 31900, desc: "Calentado tradicional paisa completo.", icono: "🍳", alergenos: ["huevo"], tags: ["popular"] },
+      { nombre: "Caldo de Costilla", precio: 14900, desc: "Caldo tradicional de costilla de res.", icono: "🍲", alergenos: [], tags: [] },
+      { nombre: "Huevos con Tomate y Cebolla (2 und)", precio: 8900, desc: "Dos huevos revueltos con tomate y cebolla.", icono: "🥚", alergenos: ["huevo"], tags: [] },
+      { nombre: "Cóctel de Fruta", precio: 8900, desc: "Cóctel de frutas frescas.", icono: "🍓", alergenos: [], tags: [] },
+      { nombre: "Canasta de Almojábanas y Pandebono", precio: 9800, desc: "Canasta con almojábanas y pandebonos frescos.", icono: "🧺", alergenos: ["lacteos", "gluten"], tags: [] },
+      { nombre: "Almojábana", precio: 3200, desc: "Almojábana individual.", icono: "🥐", alergenos: ["lacteos"], tags: [] }
+    ]
+  }
+];
+
+/*╔══════════════════════════════════════════════════════════════╗
+  ║  CONFIGURACIÓN DE ALÉRGENOS                                ║
+  ║  Editar colores y nombres aquí                              ║
+  ╚══════════════════════════════════════════════════════════════╝*/
+const ALLERGEN_CONFIG = {
+  gluten:        { label: "Gluten",         color: "#D4A373", icon: "🌾" },
+  lacteos:       { label: "Lácteos",        color: "#87CEEB", icon: "🥛" },
+  huevo:         { label: "Huevo",          color: "#FFD700", icon: "🥚" },
+  pescado:       { label: "Pescado",        color: "#4FC3F7", icon: "🐟" },
+  mariscos:      { label: "Mariscos",       color: "#FF8A80", icon: "🦐" },
+  frutos_secos:  { label: "Frutos Secos",   color: "#A1887F", icon: "🥜" }
+};
+
+/*══════════════════════════════════════════════
+  FUNCIONES DEL MENÚ - NO EDITAR DEBAJO
+══════════════════════════════════════════════*/
+
+function normalize(str) {
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
+function formatPrice(precio) {
+  return '$' + precio.toLocaleString('es-CO');
+}
+
+function buildAllergenTags(alergenos) {
+  if (!alergenos || !alergenos.length) return '';
+  return '<div class="allergen-tags">' +
+    alergenos.map(a => {
+      const cfg = ALLERGEN_CONFIG[a];
+      if (!cfg) return '';
+      return `<span class="allergen-tag" style="border-color:${cfg.color}">${cfg.icon} ${cfg.label}</span>`;
+    }).join('') + '</div>';
+}
+
+function buildBadges(tags) {
+  if (!tags || !tags.length) return '';
+  const map = {
+    nuevo: { cls: 'badge-new', label: 'Nuevo' },
+    popular: { cls: 'badge-popular', label: 'Popular' },
+    picante: { cls: 'badge-spicy', label: 'Picante' }
+  };
+  return tags.map(t => {
+    const m = map[t];
+    return m ? `<span class="badge ${m.cls}">${m.label}</span>` : '';
+  }).join('');
+}
+
+function buildItemHTML(item) {
+  const badges = buildBadges(item.tags);
+  const allergens = buildAllergenTags(item.alergenos);
+  return `
+    <div class="menu-item" data-name="${normalize(item.nombre)}" data-desc="${normalize(item.desc||'')}">
+      <div class="item-main" onclick="this.nextElementSibling.classList.toggle('open')">
+        <div class="item-img">${item.icono || '🍽️'}</div>
+        <div class="item-info">
+          <div class="item-name-row">
+            <span class="item-name">${item.nombre}</span>
+            <span class="item-price">${formatPrice(item.precio)}</span>
+          </div>
+          <div class="item-desc">${item.desc || ''}</div>
+          <div class="item-badges">
+            ${badges}
+            ${allergens}
+          </div>
+        </div>
+      </div>
+      <div class="item-detail">
+        ${item.peso ? `<div class="detail-row"><span class="detail-label">Peso</span><span class="detail-value">${item.peso}</span></div>` : ''}
+        <div class="detail-row"><span class="detail-label">Precio</span><span class="detail-value">${formatPrice(item.precio)}</span></div>
+        ${item.alergenos && item.alergenos.length ? `<div class="allergen-info"><strong>Alérgenos:</strong> ${item.alergenos.map(a => ALLERGEN_CONFIG[a] ? ALLERGEN_CONFIG[a].icon + ' ' + ALLERGEN_CONFIG[a].label : a).join(', ')}</div>` : '<div class="allergen-info" style="background:#E8F5E9;color:#2E7D32"><strong>Sin alérgenos declarados</strong></div>'}
+      </div>
+    </div>`;
+}
+
+function buildSectionHTML(cat) {
+  let html = `<section class="menu-section" id="section-${cat.id}">
+    <div class="section-header">
+      <span class="section-icon">${cat.icono}</span>
+      <h2 class="section-title">${cat.nombre}</h2>
+    </div>`;
+  if (cat.descripcion) {
+    html += `<p class="section-subtitle">${cat.descripcion}</p>`;
+  }
+  // Info boxes for special sections
+  if (cat.id === 'parrilla-res') {
+    html += `<div class="info-box">
+      <h4>3 Acompañamientos Tradicionales Incluidos</h4>
+      <ul>
+        <li>Arroz Leños</li><li>Ensalada de la casa</li>
+        <li>Papa cocida</li><li>Plátano maduro</li>
+        <li>2 arepas de maíz</li>
+      </ul>
+      <p style="margin-top:.5rem;font-size:.78rem"><strong>Especial +$2,000:</strong> Papa arrugada, papa en cascos, mazorca asada o vegetales al wok</p>
+    </div>
+    <div class="info-box">
+      <h4>Términos de Cocción</h4>
+      <ul><li>Azul</li><li>Medio</li><li>Tres Cuartos</li><li>Bien Cocido</li></ul>
+    </div>`;
+  }
+  html += cat.items.map(buildItemHTML).join('');
+  html += '</section>';
+  return html;
+}
+
+function renderMenu(data) {
+  const container = document.getElementById('menuContainer');
+  // Allergen legend
+  let legend = `<div class="allergen-legend">
+    <h3>Información de Alérgenos</h3>
+    <div class="legend-grid">
+      ${Object.entries(ALLERGEN_CONFIG).map(([k, v]) =>
+        `<div class="legend-item"><span class="legend-dot" style="background:${v.color}"></span>${v.icon} ${v.label}</div>`
+      ).join('')}
+    </div>
+    <p style="font-size:.72rem;color:var(--color-text-muted);margin-top:.5rem">Toca cada producto para ver sus alérgenos detallados. Si tienes alguna alergia, informa a nuestro personal.</p>
+  </div>`;
+  container.innerHTML = legend + data.map(buildSectionHTML).join('');
+}
+
+function renderNav(data) {
+  const nav = document.getElementById('catNavInner');
+  nav.innerHTML = data.map(cat =>
+    `<button class="cat-btn" data-cat="${cat.id}">${cat.icono} ${cat.nombre}</button>`
+  ).join('');
+}
+
+// Category navigation
+document.getElementById('catNavInner').addEventListener('click', (e) => {
+  const btn = e.target.closest('.cat-btn');
+  if (!btn) return;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const section = document.getElementById('section-' + btn.dataset.cat);
+  if (section) {
+    const navHeight = document.getElementById('catNav').offsetHeight;
+    const top = section.getBoundingClientRect().top + window.scrollY - navHeight - 10;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+});
+
+// Search
+let searchTimer;
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    const q = normalize(e.target.value.trim());
+    const items = document.querySelectorAll('.menu-item');
+    const sections = document.querySelectorAll('.menu-section');
+    if (!q) {
+      items.forEach(i => i.style.display = '');
+      sections.forEach(s => s.style.display = '');
+      document.getElementById('noResults')?.remove();
+      return;
+    }
+    let visible = 0;
+    items.forEach(item => {
+      const match = item.dataset.name.includes(q) || item.dataset.desc.includes(q);
+      item.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    sections.forEach(sec => {
+      const hasVisible = sec.querySelectorAll('.menu-item:not([style*="display: none"])').length > 0;
+      sec.style.display = hasVisible ? '' : 'none';
+    });
+    document.getElementById('noResults')?.remove();
+    if (visible === 0) {
+      const nr = document.createElement('div');
+      nr.id = 'noResults';
+      nr.className = 'no-results';
+      nr.innerHTML = '<div class="icon">🔍</div><p>No se encontraron resultados para "<strong>' + q + '</strong>"</p><p style="margin-top:.3rem;font-size:.85rem">Intenta con otro término</p>';
+      document.getElementById('menuContainer').appendChild(nr);
+    }
+  }, 200);
+});
+
+// Scroll to top
+const scrollBtn = document.getElementById('scrollTopBtn');
+window.addEventListener('scroll', () => {
+  scrollBtn.classList.toggle('visible', window.scrollY > 500);
+  // Active category highlight
+  const navHeight = document.getElementById('catNav').offsetHeight;
+  const sections = document.querySelectorAll('.menu-section');
+  let current = '';
+  sections.forEach(sec => {
+    if (sec.getBoundingClientRect().top <= navHeight + 60) {
+      current = sec.id.replace('section-', '');
+    }
+  });
+  if (current) {
+    document.querySelectorAll('.cat-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.cat === current);
+      if (b.dataset.cat === current) {
+        b.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    });
+  }
+}, { passive: true });
+
+scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// Initialize
+renderNav(MENU_DATA);
+renderMenu(MENU_DATA);
+</script>
+</body>
+</html>
