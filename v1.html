@@ -224,6 +224,15 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 2rem;
+  overflow: hidden;
+  position: relative;
+}
+.item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
 }
 .item-info { flex: 1; min-width: 0; }
 .item-name-row {
@@ -892,6 +901,65 @@ const ALLERGEN_CONFIG = {
   frutos_secos:  { label: "Frutos Secos",   color: "#A1887F", icon: "🥜" }
 };
 
+/*╔══════════════════════════════════════════════════════════════╗
+  ║  IMÁGENES DE PRODUCTOS - Banco de imágenes Unsplash         ║
+  ║  Editar URLs aquí para cambiar las fotos                    ║
+  ╚══════════════════════════════════════════════════════════════╝*/
+const UNSPLASH = 'https://images.unsplash.com/';
+const FOOD_IMAGES = {
+  cat: {
+    'entradas':'photo-1599662662614-e1c56e0ba303','sopas':'photo-1547592166-23ac45744acd',
+    'ensaladas':'photo-1615385361723-9f4c2daf42f4','cotidianos':'photo-1544025162-d76694265947',
+    'picadas':'photo-1544025162-d76694265947','otras':'photo-1544025162-d76694265947',
+    'hamburguesas':'photo-1568901346375-23c9450c58cd','sandwiches':'photo-1568901346375-23c9450c58cd',
+    'calentados':'photo-1544025162-d76694265947','parrilleritos':'photo-1564636242997-77953084df48',
+    'parrilla-res':'photo-1544025162-d76694265947','adiciones-res':'photo-1544025162-d76694265947',
+    'parrilla-cerdo':'photo-1606157715507-e106be6ab0b0','parrilla-pescado':'photo-1467003909585-2f8a72700288',
+    'parrilla-pollo':'photo-1564636242997-77953084df48','postres':'photo-1551024506-0bccd828d307',
+    'porciones':'photo-1544025162-d76694265947','bebidas':'photo-1621263764812-ed79919f4e39',
+    'bebidas-calientes':'photo-1572097682001-091bf321a5a5','cervezas':'photo-1608270586620-248524c67de9',
+    'vinos':'photo-1553361371-9b22f78e8b1d','cocteles':'photo-1514362545857-3bc16c4c7d1b',
+    'licores':'photo-1553361371-9b22f78e8b1d','kits':'photo-1544025162-d76694265947',
+    'desayunos':'photo-1544025162-d76694265947'
+  },
+  kw: [
+    ['chorizo','photo-1599662662614-e1c56e0ba303'],['morcilla','photo-1599662662614-e1c56e0ba303'],
+    ['empanada','photo-1604908176997-125f25cc6f3d'],['hamburguesa','photo-1568901346375-23c9450c58cd'],
+    ['salmón','photo-1467003909585-2f8a72700288'],['salmon','photo-1467003909585-2f8a72700288'],
+    ['trucha','photo-1467003909585-2f8a72700288'],['costilla','photo-1606157715507-e106be6ab0b0'],
+    ['chicharrón','photo-1599662662614-e1c56e0ba303'],['pollo','photo-1564636242997-77953084df48'],
+    ['helado','photo-1551024506-0bccd828d307'],['limonada','photo-1621263764812-ed79919f4e39'],
+    ['gaseosa','photo-1621263764812-ed79919f4e39'],['cerveza','photo-1608270586620-248524c67de9'],
+    ['vino','photo-1553361371-9b22f78e8b1d'],['café','photo-1572097682001-091bf321a5a5'],
+    ['cappuccino','photo-1572097682001-091bf321a5a5'],['chocolate','photo-1572097682001-091bf321a5a5'],
+    ['aromática','photo-1572097682001-091bf321a5a5'],['picada','photo-1544025162-d76694265947'],
+    ['patacón','photo-1544025162-d76694265947'],['maduro','photo-1544025162-d76694265947'],
+    ['sopa','photo-1547592166-23ac45744acd'],['consomé','photo-1547592166-23ac45744acd'],
+    ['caldo','photo-1547592166-23ac45744acd'],['ensalada','photo-1615385361723-9f4c2daf42f4'],
+    ['brocheta','photo-1544025162-d76694265947'],['papa','photo-1544025162-d76694265947'],
+    ['guacamole','photo-1615385361723-9f4c2daf42f4'],['mojito','photo-1514362545857-3bc16c4c7d1b'],
+    ['sangría','photo-1553361371-9b22f78e8b1d'],['margarita','photo-1514362545857-3bc16c4c7d1b'],
+    ['gin','photo-1514362545857-3bc16c4c7d1b'],['whisky','photo-1553361371-9b22f78e8b1d'],
+    ['aguardiente','photo-1553361371-9b22f78e8b1d'],['ron','photo-1553361371-9b22f78e8b1d'],
+    ['calentado','photo-1544025162-d76694265947'],['bistec','photo-1544025162-d76694265947'],
+    ['churrasco','photo-1544025162-d76694265947'],['lomo','photo-1544025162-d76694265947'],
+    ['filete','photo-1544025162-d76694265947'],['bife','photo-1544025162-d76694265947'],
+    ['chuleta','photo-1606157715507-e106be6ab0b0'],['bondiola','photo-1606157715507-e106be6ab0b0'],
+    ['bombón','photo-1606157715507-e106be6ab0b0'],['medallón','photo-1606157715507-e106be6ab0b0'],
+    ['tomahawk','photo-1606157715507-e106be6ab0b0'],['queso','photo-1551024506-0bccd828d307'],
+    ['torta','photo-1551024506-0bccd828d307'],['almojábana','photo-1551024506-0bccd828d307'],
+    ['huevo','photo-1544025162-d76694265947'],['kit','photo-1544025162-d76694265947']
+  ]
+};
+function getItemImg(item, catId) {
+  const name = (item.nombre||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  for(const [kw,img] of FOOD_IMAGES.kw) {
+    if(name.includes(kw.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase())) return UNSPLASH+img+'?w=200&h=200&fit=crop&q=60';
+  }
+  const ci = FOOD_IMAGES.cat[catId];
+  return ci ? UNSPLASH+ci+'?w=200&h=200&fit=crop&q=60' : null;
+}
+
 /*══════════════════════════════════════════════
   FUNCIONES DEL MENÚ - NO EDITAR DEBAJO
 ══════════════════════════════════════════════*/
@@ -927,13 +995,17 @@ function buildBadges(tags) {
   }).join('');
 }
 
-function buildItemHTML(item) {
+function buildItemHTML(item, catId) {
   const badges = buildBadges(item.tags);
   const allergens = buildAllergenTags(item.alergenos);
+  const imgUrl = getItemImg(item, catId);
+  const imgContent = imgUrl
+    ? `<img src="${imgUrl}" alt="${item.nombre}" loading="lazy" onerror="this.remove()">${item.icono || '🍽️'}`
+    : (item.icono || '🍽️');
   return `
     <div class="menu-item" data-name="${normalize(item.nombre)}" data-desc="${normalize(item.desc||'')}">
       <div class="item-main" onclick="this.nextElementSibling.classList.toggle('open')">
-        <div class="item-img">${item.icono || '🍽️'}</div>
+        <div class="item-img">${imgContent}</div>
         <div class="item-info">
           <div class="item-name-row">
             <span class="item-name">${item.nombre}</span>
@@ -979,7 +1051,7 @@ function buildSectionHTML(cat) {
       <ul><li>Azul</li><li>Medio</li><li>Tres Cuartos</li><li>Bien Cocido</li></ul>
     </div>`;
   }
-  html += cat.items.map(buildItemHTML).join('');
+  html += cat.items.map(item => buildItemHTML(item, cat.id)).join('');
   html += '</section>';
   return html;
 }
